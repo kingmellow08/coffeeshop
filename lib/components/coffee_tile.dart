@@ -7,9 +7,6 @@ class CoffeeTile extends StatelessWidget {
   void Function() ? onPressed;
   CoffeeTile({super.key, required this.coffee, required this.icon, required this.onPressed,});
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
