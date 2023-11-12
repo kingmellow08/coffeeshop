@@ -15,24 +15,13 @@ class ShopPage extends StatefulWidget {
 
 class _ShopPageState extends State<ShopPage> {
 
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // add coffee to cart 
-  Future<void> addToCart(Coffee coffee, String imagePath) async {
 
-    String coffeeName = coffee.name;
-    String coffeePrice = coffee.price;
-    String coffeeImage = imagePath;
-
+  // add coffee to cart
+  void addToCart(Coffee coffee, String imagePath) {
     Provider.of<CoffeeShop>(context, listen: false).addItemToCart(coffee);
-
-    await _firestore.collection('cart').add({
-      'name': coffeeName,
-      'price': coffeePrice,
-      'image': coffeeImage,
-    });
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<CoffeeShop>(
@@ -52,20 +41,20 @@ class _ShopPageState extends State<ShopPage> {
               // list of coffee to buy 
               Expanded(
                 child: ListView.builder(
-                  itemCount:value.coffeeShop.length, 
+                  itemCount:value.coffeeShop.length,
                   itemBuilder: (context, index) {
-                // get individual coffee 
-                Coffee eachCoffee = value.coffeeShop[index];
+                // get individual coffee
+                    Coffee eachCoffee = value.coffeeShop[index];
                 // return the tile for this coffee
                 return CoffeeTile(
                   coffee: eachCoffee,
                   icon: Icon(Icons.add),
                   onPressed: (){
-                    addToCart(eachCoffee, eachCoffee.imagePath);
+                    addToCart( eachCoffee, eachCoffee.imagePath);
                   },
                   );
-                
               }),
+
               ),
             ],
           ),
